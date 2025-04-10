@@ -1,0 +1,35 @@
+openapi: 3.0.1
+info:
+  title: HTML Extractor API
+  version: 1.0.0
+servers:
+  - url: https://html-extractor.onrender.com
+paths:
+  /extract-html:
+    post:
+      summary: Extract product tile HTML from a category page
+      operationId: extractHTML
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                  description: Category page URL
+                selector:
+                  type: string
+                  description: CSS selector for a product tile
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  html:
+                    type: string
+                    description: Extracted product tile HTML
