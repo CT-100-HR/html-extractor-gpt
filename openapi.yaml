@@ -3,7 +3,7 @@ info:
   title: HTML Extractor API
   version: 1.0.0
 servers:
-  - url: https://html-extractor.onrender.com
+  - url: https://html-extractor-gpt.onrender.com
 paths:
   /extract-html:
     post:
