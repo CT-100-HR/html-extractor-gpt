@@ -4,11 +4,12 @@
   "description": "Extract product tile HTML for GPT action",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "postinstall": "echo Skipping Puppeteer Chromium download"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",
-    "puppeteer": "^20.8.1"
+    "puppeteer-core": "^20.8.1"
   }
 }
