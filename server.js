@@ -1,5 +1,5 @@
 const express = require('express');
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
 const cors = require('cors');
 
 const app = express();
@@ -13,25 +13,26 @@ app.post('/extract-html', async (req, res) => {
     return res.status(400).json({ error: 'Missing URL or selector' });
   }
 
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: [
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--disable-gpu',
-      '--disable-dev-shm-usage',
-      '--disable-accelerated-2d-canvas',
-      '--no-zygote',
-      '--single-process',
-      '--no-first-run',
-      '--no-default-browser-check',
-      '--disable-background-networking',
-      '--disable-background-timer-throttling'
-    ]
-  });
-  const page = await browser.newPage();
-
   try {
+    const browser = await puppeteer.launch({
+      headless: true,
+      executablePath: '/usr/bin/google-chrome', // Adjust path if needed
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-gpu',
+        '--disable-dev-shm-usage',
+        '--disable-accelerated-2d-canvas',
+        '--no-zygote',
+        '--single-process',
+        '--no-first-run',
+        '--no-default-browser-check',
+        '--disable-background-networking',
+        '--disable-background-timer-throttling'
+      ]
+    });
+
+    const page = await browser.newPage();
     await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
 
     const html = await page.evaluate((sel) => {
@@ -47,7 +48,6 @@ app.post('/extract-html', async (req, res) => {
 
     res.json({ html });
   } catch (err) {
-    await browser.close();
     res.status(500).json({ error: 'Failed to extract HTML', details: err.message });
   }
 });
