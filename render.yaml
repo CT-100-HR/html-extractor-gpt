@@ -2,10 +2,16 @@ services:
   - type: web
     name: html-extractor-gpt
     env: node
-    buildCommand: npm install
+    buildCommand: |
+      curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+      export NVM_DIR="$HOME/.nvm"
+      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+      nvm install 20.11.1
+      nvm use 20.11.1
+      node -v
+      npm install
     startCommand: node server.js
     plan: free
     region: oregon
     branch: main
-    runtime: node
     autoDeploy: true
