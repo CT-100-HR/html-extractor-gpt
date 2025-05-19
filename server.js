@@ -16,9 +16,9 @@ app.post('/extract-html', async (req, res) => {
   try {
     const browser = await puppeteer.launch({
   headless: true,
-  executablePath: '/usr/bin/chromium-browser', // Adjust path if needed
+//  executablePath: '/usr/bin/chromium-browser', // Adjust path if needed
       args: [
-        '--no-sandbox',
+        /*'--no-sandbox',
         '--disable-setuid-sandbox',
         '--disable-gpu',
         '--disable-dev-shm-usage',
@@ -28,7 +28,7 @@ app.post('/extract-html', async (req, res) => {
         '--no-first-run',
         '--no-default-browser-check',
         '--disable-background-networking',
-        '--disable-background-timer-throttling'
+        '--disable-background-timer-throttling' */
       ]
     });
 
