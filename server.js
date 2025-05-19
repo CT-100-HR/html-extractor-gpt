@@ -15,8 +15,8 @@ app.post('/extract-html', async (req, res) => {
 
   try {
     const browser = await puppeteer.launch({
-      headless: true,
-      executablePath: '/usr/bin/google-chrome', // Adjust path if needed
+  headless: true,
+  executablePath: '/usr/bin/chromium-browser', // Adjust path if needed
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
