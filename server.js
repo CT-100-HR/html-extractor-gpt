@@ -1,10 +1,12 @@
 const express = require('express');
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
 const cors = require('cors');
-
 const app = express();
+
 app.use(cors());
 app.use(express.json());
+
+const chromiumPath = "/usr/bin/chromium"; // Fallback for Render environments
 
 app.post('/extract-html', async (req, res) => {
   const { url, selector } = req.body;
@@ -16,6 +18,7 @@ app.post('/extract-html', async (req, res) => {
   try {
     const browser = await puppeteer.launch({
       headless: true,
+      executablePath: chromiumPath,
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
